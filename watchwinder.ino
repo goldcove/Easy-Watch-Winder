@@ -1,3 +1,9 @@
+/* Yet another arduino based watch winder
+ * Copyright goldcove@gmail.com
+ * License: GPLv3 or later
+ */
+
+
 void setup() {
   // put your setup code here, to run once:
 
