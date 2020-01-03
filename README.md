@@ -3,6 +3,10 @@
 
 ## Requirements
 
+### Software
+
+### Hardware
+
 ## Operation
 
 ## Background info
@@ -30,7 +34,8 @@
 - https://www.youtube.com/watch?v=9rfCjYOQ4L8
 
 ### Programming examples and tidbits
-https://www.instructables.com/id/How-to-use-Potentiometer-Arduino-Tutorial/
+- https://www.instructables.com/id/How-to-use-Potentiometer-Arduino-Tutorial/
+- https://www.arduino.cc/en/tutorial/potentiometer
 
 ## License
 This project is licensed under GPLv3 (or later)
