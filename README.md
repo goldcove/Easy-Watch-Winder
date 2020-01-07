@@ -4,9 +4,9 @@
 ## Requirements
 
 ### Software
-//Sellita Movement SW200:
-//TPD: 650-800
-//Turn direction: Both
+Sellita Movement SW200:
+- TPD: 650-800
+- Turn direction: Both
 
 ### Hardware
 Step motor:
