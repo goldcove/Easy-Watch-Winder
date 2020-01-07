@@ -4,12 +4,9 @@
 ## Requirements
 
 ### Software
-Sellita Movement SW200:
-- TPD: 650-800
-- Turn direction: Both
 
 ### Hardware
-Step motor:
+Step motor
 Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
 
 ## Operation
@@ -20,8 +17,8 @@ Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/
 ### Version 2.0
 - Advanced operation
   - TPD selector
-  - Operation Selector
-  - Power switches.
+  - Turn direction selector
+  - Power switch
 
 ## Background info
 ### Watch-specific factors (variables) affecting the programming:
@@ -29,6 +26,10 @@ Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/
 - Rest (time)
 - Direction of turning
 - Smooth motor operation
+
+Sellita Movement SW200:
+- TPD: 650-800
+- Turn direction: Both
 
 ### Factors (Watch-specific) affecting the hardware/construction:
 - Three-way switch for selecting rotation
