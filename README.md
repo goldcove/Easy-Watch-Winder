@@ -4,6 +4,9 @@
 ## Requirements
 
 ### Software
+//Sellita Movement SW200:
+//TPD: 650-800
+//Turn direction: Both
 
 ### Hardware
 Step motor:
@@ -36,6 +39,7 @@ Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/
 - De-Magnetization
 
 ### Watch winder operation
+- https://www.orbita.com/winder-support
 - https://blog.crownandcaliber.com/how-to-use-a-watch-winder/
 - https://www.buywatchwinders.com/blog/how-to-properly-use-and-set-your-watch-winder/
 - https://www.barringtonwatchwinders.com/how-it-works
