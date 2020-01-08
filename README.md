@@ -6,8 +6,8 @@
 ### Software
 
 ### Hardware
-Step motor
-Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
+- Step motor – Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
+- 5mm motor shaft coupler with flange coupling
 
 ## Operation
 
@@ -23,13 +23,21 @@ Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/
 ## Background info
 ### Watch-specific factors (variables) affecting the programming:
 - Turns per day (TPD)
+  - Typically between 500-950, ref. [Orbita.com](https://www.orbita.com/winder-support)
 - Rest (time)
+  - Function of TPD and a predefined runtime variable.
+- Runtime
+   - Find best practice for runtime interval. 
 - Direction of turning
+  - Clockwise (CW)
+  - Counter clockwise (CCW)
+  - Both
 - Smooth motor operation
 
-Sellita Movement SW200:
-- TPD: 650-800
-- Turn direction: Both
+Example watch movement specification:
+| Movement | TPD | Turn direction |
+| ---      | --- | ---            |
+| Sellita SW200 | 650-800 | Both |
 
 ### Factors (Watch-specific) affecting the hardware/construction:
 - Three-way switch for selecting rotation
@@ -50,9 +58,9 @@ Sellita Movement SW200:
 - https://www.youtube.com/watch?v=9rfCjYOQ4L8
 
 ### Programming examples and tidbits
+- https://www.arduino.cc/reference/en/
 - https://www.instructables.com/id/How-to-use-Potentiometer-Arduino-Tutorial/
 - https://www.arduino.cc/en/tutorial/potentiometer
--
 
 ## License
 This project is licensed under GPLv3 (or later)
