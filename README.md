@@ -27,7 +27,7 @@
 - Rest (time)
   - Function of TPD and a predefined runtime variable.
 - Runtime
-   - Find best practice for runtime interval. 
+   - Find best practice for runtime interval.
 - Direction of turning
   - Clockwise (CW)
   - Counter clockwise (CCW)
@@ -35,6 +35,7 @@
 - Smooth motor operation
 
 Example watch movement specification:
+
 | Movement | TPD | Turn direction |
 | ---      | --- | ---            |
 | Sellita SW200 | 650-800 | Both |
