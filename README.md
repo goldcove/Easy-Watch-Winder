@@ -14,6 +14,7 @@
 ## Development milestones
 ### Version 1.0
 - Basic software and hardware to safely wind a watch.
+
 ### Version 2.0
 - Advanced operation
   - TPD selector
@@ -44,7 +45,7 @@ Example watch movement specification:
 - Three-way switch for selecting rotation
 - Two-way on-off switch
 - Rheostat for adjusting TPD
-- Noise (operation)
+- Noise (operating)
 - Angle of watch housing (?)
 - De-Magnetization
 
