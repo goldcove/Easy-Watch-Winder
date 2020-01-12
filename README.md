@@ -63,6 +63,8 @@ Example watch movement specification:
 - https://www.arduino.cc/reference/en/
 - https://www.instructables.com/id/How-to-use-Potentiometer-Arduino-Tutorial/
 - https://www.arduino.cc/en/tutorial/potentiometer
-
+- http://www.lucadentella.it/en/2014/08/01/interruttore-a-tre-posizioni-e-arduino/
+- https://www.open-electronics.org/the-power-of-arduino-this-unknown/
+  - Options for powering the Arduino, see VIN.
 ## License
 This project is licensed under GPLv3 (or later)
