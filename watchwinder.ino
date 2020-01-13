@@ -2,6 +2,7 @@
  * Copyright goldcove@gmail.com
  * License: GPLv3 or later
  */
+<<<<<<< HEAD
 #include <Stepper.h>
 const float stepsPerRevolution = 2048; //Steps required for one shat revolution. based on your motor speed and gear ratio.
 int rpm = 15; /* set the speed in rotation per minute (rpm).
@@ -68,4 +69,34 @@ void loop() {
   //rest between run cycles
   Serial.println("resting");
   delay(rest*1000); //delay n seconds
+=======
+
+#include <Stepper.h>
+
+//watchwinder
+const float stepsPerRevolution = 2048; 
+Stepper steppmotor(stepsPerRevolution, 8, 10, 9, 11);
+
+void setup() {
+  // put your setup code here, to run once:
+  //watchwinder
+  // set the speed at 60 rpm:
+  steppmotor.setSpeed(8);
+  // initialize the serial port:
+  Serial.begin(9600);
+  Serial.println("watchwinder dev");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  // step one revolution  in one direction:
+  Serial.println("clockwise");
+  steppmotor.step(stepsPerRevolution);
+  delay(500);
+
+  // step one revolution in the other direction:
+  Serial.println("counterclockwise");
+  steppmotor.step(-stepsPerRevolution);
+  delay(500);
+>>>>>>> stepper_motor
 }
