@@ -3,12 +3,12 @@
  * License: GPLv3 or later
  */
 #include <Stepper.h>
-const float stepsPerRevolution = 2048; //Steps required for one shat revolution. based on your motor speed and gear ratio.
+const float stepsPerRevolution = 2048; //Steps required for one shat revolution. Based on your motor speed and gear ratio.
 int rpm = 15; /* set the speed in rotation per minute (rpm).
               Test and see what rpm your motor can handle...
-              rpm less than 0.5 risks that your program runs continuously*/
+              rpm less than 1 risks that your program runs continuously*/
 Stepper steppmotor(stepsPerRevolution, 8, 10, 9, 11); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
-int direction; //Motor turnning direction. 0=both, 1=clockwise, 2=counterclockwise. In accordance with your watch requirements.
+int turndirection; //Motor turnning direction. 0=both, 1=clockwise, 2=counterclockwise. In accordance with your watch requirements.
 int tpd; //Number of turns per day, in accordance with your watch requirements.
 int turns; //number of turns to turn for each run cycle
 unsigned long rest; //seconds to rest between each run cycle
@@ -20,14 +20,16 @@ void setup() {
   steppmotor.setSpeed(rpm);
   // initialize the serial port:
   Serial.begin(9600);
-  tpd=725;
-  direction=0;
+  tpd=720;
+  turndirection=0;
   Serial.println("watchwinder dev");
   if (debug) {
     Serial.print("tpd: ");
     Serial.println(tpd);
-    Serial.print("direction: ");
-    Serial.println(direction);
+    Serial.print("turndirection: ");
+    Serial.println(turndirection);
+    Serial.print("rpm: ");
+    Serial.println(rpm);
   }
 }
 
@@ -47,24 +49,30 @@ void loop() {
   }
 
   //run
-  switch (direction) {
+  switch (turndirection) {
     case 0: //both directions
       cw=turns/2;
-      ccw=turns-ccw; //in case odd number
-      Serial.println("running cw");
-      steppmotor.step(stepsPerRevolution*cw);
-      Serial.println("running ccw");
-      steppmotor.step(-stepsPerRevolution*ccw);
+      ccw=turns-cw; //in case odd number
       break;
     case 1: //clockwise
-      Serial.println("running cw");
-      steppmotor.step(stepsPerRevolution*turns);
+      cw=turns;
+      ccw=0;
       break;
     case 2: //counterclockwise
-      Serial.println("running ccw");
-      steppmotor.step(-stepsPerRevolution*turns);
+      cw=0;
+      ccw=turns;
       break;
   }
+  if (cw) { //running cw
+      if (debug) {Serial.print("cw turns: "); Serial.println(cw);}
+      Serial.println("running cw");
+      steppmotor.step(stepsPerRevolution*cw);
+  }
+  if (ccw) { //running ccw
+      if (debug) {Serial.print("ccw turns: "); Serial.println(ccw);}
+      Serial.println("running ccw");
+      steppmotor.step(-stepsPerRevolution*ccw);
+  }  
   //rest between run cycles
   Serial.println("resting");
   delay(rest*1000); //delay n seconds
