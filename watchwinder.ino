@@ -72,8 +72,15 @@ void loop() {
       if (debug) {Serial.print("ccw turns: "); Serial.println(ccw);}
       Serial.println("running ccw");
       steppmotor.step(-stepsPerRevolution*ccw);
-  }  
+  }
   //rest between run cycles
   Serial.println("resting");
+  /*The stepper.h library keeps some of the pins HIGH between runs. 
+  Manually set all motor pins LOW.
+  Reduces power consumption and heat buildup in motor*/
+  digitalWrite(8, 0); //turn off power to en motor
+  digitalWrite(9, 0); //turn off power to en motor
+  digitalWrite(10, 0); //turn off power to en motor
+  digitalWrite(11, 0); //turn off power to en motor
   delay(rest*1000); //delay n seconds
 }
