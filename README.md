@@ -4,6 +4,7 @@
 ## Requirements
 
 ### Software
+Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix)
 
 ### Hardware
 - Step motor – Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
@@ -27,6 +28,7 @@
   - Typically between 500-950, ref. [Orbita.com](https://www.orbita.com/winder-support)
 - Rest (time)
   - Function of TPD and a predefined runtime variable.
+- RPM. What is the normal RPM for watch winders?
 - Runtime
    - Find best practice for runtime interval.
 - Direction of turning
@@ -47,7 +49,7 @@ Example watch movement specification:
 - Rheostat for adjusting TPD
 - Noise (operating)
 - Angle of watch housing (?)
-- De-Magnetization
+- De-Magnetization (?)
 
 ### Watch winder operation
 - https://www.orbita.com/winder-support
