@@ -1,12 +1,16 @@
-/* Yet another arduino based watch winder
+/*
+ * Yet another arduino based watch winder
  * Copyright goldcove@gmail.com
  * License: GPLv3 or later
  */
-#include <Stepper.h>
+#include <Stepper.h> //Warning: Risk for motor overheat, see note at end of loop().
 const float stepsPerRevolution = 2048; //Steps required for one shat revolution. Based on your motor speed and gear ratio.
-int rpm = 15; /* set the speed in rotation per minute (rpm).
-              Test and see what rpm your motor can handle...
-              rpm less than 1 risks that your program runs continuously*/
+int rpm = 8; //set the speed in rotation per minute (rpm)
+/*
+ *  By observing videos of various commercial watch winders I have observerd that rpm usually is around 8.
+ *  Test and see what rpm your motor can handle...
+ *  Note: rpm less than 1 risks that your program runs continuously
+ */
 Stepper steppmotor(stepsPerRevolution, 8, 10, 9, 11); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
 int turndirection; //Motor turnning direction. 0=both, 1=clockwise, 2=counterclockwise. In accordance with your watch requirements.
 int tpd; //Number of turns per day, in accordance with your watch requirements.
@@ -34,21 +38,31 @@ void setup() {
 }
 
 void loop() {
-  //Read tpd from potentiometer (v2)
-  //Read direction (v2)
+  /*
+   * To be implemented in version 2.0:
+   * Read tpd from potentiometer
+   * Read direction from three-way switch
+   */
 
-  /*Calculate turns for each run cycle and rest in seconds between cycle.
-  The winder will run every hour of the day.*/
+  /*
+   * Calculate turns for each run cycle and rest in seconds between cycle.
+   * The winder will run every hour of the day.
+   */
   turns=tpd/24; //turns per hour
   rest=3600-(turns*60/rpm); //Remainig seconds in hour is rest.
-  if (debug) {
+  if (debug) { //print debug info
     Serial.print("turns: ");
     Serial.println(turns);
-    Serial.print("rest: ");
+    Serial.print("time turns (s): ");
+    Serial.println(turns*60/rpm);
+    Serial.print("time rest (s): ");
     Serial.println(rest);
   }
-
-  //run
+  /*
+   * run
+   */
+  cw=0;
+  ccw=0;
   switch (turndirection) {
     case 0: //both directions
       cw=turns/2;
@@ -56,10 +70,8 @@ void loop() {
       break;
     case 1: //clockwise
       cw=turns;
-      ccw=0;
       break;
     case 2: //counterclockwise
-      cw=0;
       ccw=turns;
       break;
   }
@@ -73,14 +85,18 @@ void loop() {
       Serial.println("running ccw");
       steppmotor.step(-stepsPerRevolution*ccw);
   }
-  //rest between run cycles
+  /*
+   * rest between run cycles
+   */
   Serial.println("resting");
-  /*The stepper.h library keeps some of the pins HIGH between runs. 
-  Manually set all motor pins LOW.
-  Reduces power consumption and heat buildup in motor*/
-  digitalWrite(8, 0); //turn off power to en motor
-  digitalWrite(9, 0); //turn off power to en motor
-  digitalWrite(10, 0); //turn off power to en motor
-  digitalWrite(11, 0); //turn off power to en motor
+  /*
+   *  The stepper.h library keeps some of the pins HIGH between runs.
+   *  In order to reduces power consumption and heat buildup in motor:
+   *  Manually set all motor pins LOW.
+   */
+  digitalWrite(8, LOW); //turn off power to motor
+  digitalWrite(9, LOW); //turn off power to motor
+  digitalWrite(10, LOW); //turn off power to motor
+  digitalWrite(11, LOW); //turn off power to motor
   delay(rest*1000); //delay n seconds
 }
