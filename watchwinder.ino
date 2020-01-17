@@ -1,4 +1,5 @@
 /*
+ * Easy Watch Winder
  * Yet another arduino based watch winder
  * Copyright goldcove@gmail.com
  * License: GPLv3 or later
@@ -11,7 +12,12 @@ int rpm = 8; //set the speed in rotation per minute (rpm)
  *  Test and see what rpm your motor can handle...
  *  Note: rpm less than 1 risks that your program runs continuously
  */
-Stepper steppmotor(stepsPerRevolution, 8, 10, 9, 11); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
+const int motorPin1=8; //digital pin 8
+const int motorPin2=9; 
+const int motorPin3=10;
+const int motorPin4=11;
+Stepper steppmotor(stepsPerRevolution, motorPin1, motorPin2, motorPin3, motorPin4); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
+
 int turndirection; //Motor turnning direction. 0=both, 1=clockwise, 2=counterclockwise. In accordance with your watch requirements.
 int tpd; //Number of turns per day, in accordance with your watch requirements.
 int turns; //number of turns to turn for each run cycle
@@ -26,7 +32,7 @@ void setup() {
   Serial.begin(9600);
   tpd=720;
   turndirection=0;
-  Serial.println("watchwinder dev");
+  Serial.println("Easy Watch Winder");
   if (debug) {
     Serial.print("tpd: ");
     Serial.println(tpd);
@@ -94,9 +100,9 @@ void loop() {
    *  In order to reduces power consumption and heat buildup in motor:
    *  Manually set all motor pins LOW.
    */
-  digitalWrite(8, LOW); //turn off power to motor
-  digitalWrite(9, LOW); //turn off power to motor
-  digitalWrite(10, LOW); //turn off power to motor
-  digitalWrite(11, LOW); //turn off power to motor
+  digitalWrite(motorPin1, LOW); //turn off power to motor
+  digitalWrite(motorPin2, LOW); //turn off power to motor
+  digitalWrite(motorPin3, LOW); //turn off power to motor
+  digitalWrite(motorPin4, LOW); //turn off power to motor
   delay(rest*1000); //delay n seconds
 }

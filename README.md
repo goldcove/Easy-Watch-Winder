@@ -1,16 +1,20 @@
-# watchwinder
+# Easy Watch Winder
 *Yet another Arduino based watch winder*
 
-## Requirements
+Easy winder is an user friendly, low cost and watch-safe automatic watch winder based.
 
-### Software
+Simply set the turns per day (TPD) and rotation variable in accordance with your wathc specification (See [Orbita.com](https://www.orbita.com/winder-support)) and run the program :-D
+
+## Software requirements
 Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix)
 
-### Hardware
-- Step motor – Welleman vma401 with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
+## Hardware requirements
+- Step motor – E.g. Welleman vma401 (28BYJ-48)) with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
 - 5mm motor shaft coupler with flange coupling
-
-## Operation
+- Arduino board
+- Wires
+- USB cable and power adapter (for power)
+- Some sort of housing, e.g. a small box.
 
 ## Development milestones
 ### Version 1.0
@@ -47,9 +51,10 @@ Example watch movement specification:
 - Three-way switch for selecting rotation
 - Two-way on-off switch
 - Rheostat for adjusting TPD
-- Noise (operating)
-- Angle of watch housing (?)
-- De-Magnetization (?)
+- Angle of watch housing?
+    - Commercial watch winders use both vertical, horizontal and slanted mounting. Probably does not affect performance.
+- De-Magnetization?
+  - One source mentions this, probably safe to disregard.
 
 ### Watch winder operation
 - https://www.orbita.com/winder-support
