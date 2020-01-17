@@ -5,6 +5,8 @@ Easy winder is an user friendly, low cost and watch-safe automatic watch winder.
 
 Simply set the turns per day (TPD) and rotation variable in accordance with your wathc specification (See [Orbita.com](https://www.orbita.com/winder-support)) and run the program :-D
 
+The program will first divide TPD per hour. Then it will wind the watch for a couple of minutes before resting the remaining minutes of the hour. This process will repeat every hour.
+
 ## Software requirements
 Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix)
 
