@@ -1,7 +1,7 @@
 # Easy Watch Winder
 *Yet another Arduino based watch winder*
 
-Easy winder is an user friendly, low cost and watch-safe automatic watch winder based.
+Easy winder is an user friendly, low cost and watch-safe automatic watch winder.
 
 Simply set the turns per day (TPD) and rotation variable in accordance with your wathc specification (See [Orbita.com](https://www.orbita.com/winder-support)) and run the program :-D
 
