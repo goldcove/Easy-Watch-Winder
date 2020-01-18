@@ -8,7 +8,7 @@ Simply set the turns per day (TPD) and rotation variable in accordance with your
 The program will first divide TPD per hour. Then it will wind the watch for a couple of minutes before resting the remaining minutes of the hour. This process will repeat every hour.
 
 ## Software requirements
-Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix)
+Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix). Determine your stepper motor steps per rotation, this should be listed in the manual (or try the good old try and fail method)
 
 ## Hardware requirements
 - Step motor – E.g. Welleman vma401 (28BYJ-48)) with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
@@ -31,12 +31,11 @@ Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for c
 ## Background info
 ### Watch-specific factors (variables) affecting the programming:
 - Turns per day (TPD)
-  - Typically between 500-950, ref. [Orbita.com](https://www.orbita.com/winder-support)
+  - Typically between 500-1000, ref. [Orbita.com](https://www.orbita.com/winder-support)
 - Rest (time)
-  - Function of TPD and a predefined runtime variable.
-- RPM. What is the normal RPM for watch winders?
-- Runtime
-   - Find best practice for runtime interval.
+  - Function of TPD and RPM.
+- RPM.
+  - Commercial watch winders typically use approx. 6-8 rpm.
 - Direction of turning
   - Clockwise (CW)
   - Counter clockwise (CCW)
