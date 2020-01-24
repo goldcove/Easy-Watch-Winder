@@ -13,7 +13,7 @@ int rpm = 8; //set the speed in rotation per minute (rpm)
  *  Note: rpm less than 1 risks that your program runs continuously
  */
 const int motorPin1=8; //digital pin 8
-const int motorPin2=9; 
+const int motorPin2=9;
 const int motorPin3=10;
 const int motorPin4=11;
 Stepper steppmotor(stepsPerRevolution, motorPin1, motorPin2, motorPin3, motorPin4); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
@@ -97,8 +97,8 @@ void loop() {
   Serial.println("resting");
   /*
    *  The stepper.h library keeps some of the pins HIGH between runs.
-   *  In order to reduces power consumption and heat buildup in motor:
-   *  Manually set all motor pins LOW.
+   *  In order to reduces power consumption and heat buildup in motor
+   *  all motor pins LOW.
    */
   digitalWrite(motorPin1, LOW); //turn off power to motor
   digitalWrite(motorPin2, LOW); //turn off power to motor
