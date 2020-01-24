@@ -7,20 +7,25 @@ Simply set the turns per day (TPD) and rotation variable in accordance with your
 
 The program will first divide TPD per hour. Then it will wind the watch for a couple of minutes before resting the remaining minutes of the hour. This process will repeat every hour.
 
+The code is well commented and should be easy to modify for new and experienced programmers alike.
+
 ## Software requirements
 Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix). Determine your stepper motor steps per rotation, this should be listed in the manual (or try the good old try and fail method)
 
 ## Hardware requirements
+- Ardunio or compatible development board
 - Step motor – E.g. Welleman vma401 (28BYJ-48)) with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
 - 5mm motor shaft coupler with flange coupling
 - Arduino board
 - Wires
 - USB cable and power adapter (for power)
 - Some sort of housing, e.g. a small box.
+[Photo showing connections on the Arduino](https://github.com/goldcove/Easy-Watch-Winder/raw/master/Easy%20Watch%20Winder%20connections%20v1.0.jpg)
 
 ## Development milestones
 ### Version 1.0
 - Basic software and hardware to safely wind a watch.
+  - Proof-of-concept watch mount and electronic housing
 
 ### Version 2.0
 - Advanced operation
