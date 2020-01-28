@@ -51,12 +51,13 @@ void loop() {
    */
    tpd = analogRead(A5); // read the value from the potentiometer
    /*
-    * Minum TPD value 500
-    * Maxiumum TPD value 1200
+    * Minimum TPD value 500
+    * Maximum TPD value 1200
+    * based on max/min values from Orbita database (see readme)
     */
-   tpd=map(tpd,0,1023,500,1200);
-   if (debug) {
-     Serial.print("Input TPD: ");
+   tpd=map(tpd,0,1023,500,1200); //maps analog read value to tpd range
+   if (debug) { //print debug info
+     Serial.print("input TPD: ");
      Serial.println(String(tpd));
    }
 
@@ -107,8 +108,8 @@ void loop() {
   Serial.println("resting");
   /*
    *  The stepper.h library keeps some of the pins HIGH between runs.
-   *  In order to reduces power consumption and heat buildup in motor:
-   *  Manually set all motor pins LOW.
+   *  In order to reduces power consumption and heat buildup in motor,
+   *  manually set all motor pins LOW.
    */
   digitalWrite(motorPin1, LOW); //turn off power to motor
   digitalWrite(motorPin2, LOW); //turn off power to motor
