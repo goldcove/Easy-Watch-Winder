@@ -30,7 +30,7 @@ int turns; //number of turns to turn for each run cycle
 unsigned long rest; //seconds to rest between each run cycle
 int cw; //clockwise
 int ccw; //counterclockwise
-int debug=1; //enable debuging
+int debug=0; //enable debuging
 
 void setup() {
   pinMode(motorPin1, OUTPUT);
@@ -109,7 +109,7 @@ void loop() {
   Serial.println("resting");
   /*
    *  The stepper.h library keeps some of the pins HIGH between runs.
-   *  In order to reduces power consumption and heat buildup in motor
+   *  In order to reduces power consumption and heat buildup in motor set
    *  all motor pins LOW.
    */
   digitalWrite(motorPin1, LOW); //turn off power to motor
