@@ -1,7 +1,7 @@
 # Easy Watch Winder
 *Yet another Arduino based watch winder*
 
-Easy winder is an user friendly, low cost and watch-safe automatic watch winder.
+Easy Watch Winder is an user friendly, low cost and watch-safe automatic watch winder.
 
 Simply set the turns per day (TPD) and rotation variable in accordance with your wathc specification (See [Orbita.com](https://www.orbita.com/winder-support)) and run the program :-D
 
@@ -10,16 +10,17 @@ The program will first divide TPD per hour. Then it will wind the watch for a co
 The code is well commented and should be easy to modify for new and experienced programmers alike.
 
 ## Software requirements
-Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix). Determine your stepper motor steps per rotation, this should be listed in the manual (or try the good old try and fail method)
+Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for comment and fix). 
 
 ## Hardware requirements
 - Ardunio or compatible development board
-- Step motor – E.g. Welleman vma401 (28BYJ-48)) with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
+- Stepper motor – E.g. Welleman vma401 (28BYJ-48)) with ULN2003 driver board (https://www.velleman.eu/downloads/29/vma401_a4v01.pdf)
 - 5mm motor shaft coupler with flange coupling
 - Arduino board
 - Wires
-- USB cable and power adapter (for power)
+- USB cable and power adapter
 - Some sort of housing, e.g. a small box.
+- Some small screws to attach motor and shaft coupler
 [Photo showing connections on the Arduino](https://github.com/goldcove/Easy-Watch-Winder/raw/master/Easy%20Watch%20Winder%20connections%20v1.0.jpg)
 
 ## Development milestones
@@ -31,7 +32,8 @@ Stepper.h built-in Arduino library (Note: Risk of motor overheat. See code for c
 - Advanced operation
   - TPD selector
   - Turn direction selector
-  - Power switch
+  - Power switch (preferably to cut power to both Arduino and stepper motor)
+- Permanent watch mount and electronics housing
 
 ## Background info
 ### Watch-specific factors (variables) affecting the programming:
