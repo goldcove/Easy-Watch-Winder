@@ -21,7 +21,8 @@ int motorPin4=11;
 Stepper steppmotor(stepsPerRevolution, motorPin4, motorPin2, motorPin3, motorPin1); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
 /*
  * NOTE: Non-standard pin order for the Welleman 401 stepper motor. See https://forum.vellemanprojects.eu/t/no-reverse-arduino-uno-velleman-vma401-5vdc-stepper-motor/14362/2
- * Motor wires 1 and 4 are switched and different from the example in stepper.h background info: https://www.tigoe.com/pcomp/code/circuits/motors/stepper-motors/
+ * Motor coils 1 and 4 are switched and different from the example in stepper.h background info: https://www.tigoe.com/pcomp/code/circuits/motors/stepper-motors/
+ * The motor will work with 1,2,3,4 pin order but with reduced performance and possbily increased wear.
  */
 
 int turndirection; //Motor turnning direction. 0=both, 1=clockwise, 2=counterclockwise. In accordance with your watch requirements.
