@@ -94,6 +94,9 @@ void loop() {
       ccw=turns;
       break;
   }
+  /*
+  * With my hardware setup the clock rotaion is reversed.
+  */
   if (cw) { //running cw
       Serial.println("running cw");
       if (debug) {Serial.print("cw turns: "); Serial.println(cw);}
@@ -112,8 +115,8 @@ void loop() {
   Serial.println("resting");
   /*
    *  The stepper.h library keeps some of the pins HIGH between runs.
-   *  In order to reduces power consumption and heat buildup in motor set
-   *  all motor pins LOW.
+   *  In order to reduces power consumption and heat buildup in motor,
+   *  set all motor pins LOW.
    */
   digitalWrite(motorPin1, LOW); //turn off power to motor
   digitalWrite(motorPin2, LOW); //turn off power to motor
