@@ -34,13 +34,12 @@ int ccw; //counterclockwise
 int debug=0; //enable debuging
 
 void setup() {
-  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin1, OUTPUT); // Set pins to output mode
   pinMode(motorPin2, OUTPUT);
   pinMode(motorPin3, OUTPUT);
   pinMode(motorPin4, OUTPUT);
   steppmotor.setSpeed(rpm);
-  // initialize the serial port:
-  Serial.begin(9600);
+  Serial.begin(9600); // initialize the serial port:
   tpd=720;
   turndirection=0;
   Serial.print("Easy Watch Winder v");
