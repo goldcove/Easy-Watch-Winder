@@ -52,10 +52,10 @@ void loop() {
    tpd = analogRead(A5); // read the value from the potentiometer
    /*
     * Minimum TPD value 500
-    * Maximum TPD value 1200
+    * Maximum TPD value 1500
     * based on max/min values from Orbita database (see readme)
     */
-   tpd=map(tpd,0,1023,500,1200); //maps analog read value to tpd range
+   tpd=map(tpd,0,1023,500,1500); //maps analog read value to tpd range
    if (debug) { //print debug info
      Serial.print("input TPD: ");
      Serial.println(String(tpd));
