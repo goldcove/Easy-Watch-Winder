@@ -1,4 +1,4 @@
-/*
+  /*
  * Easy Watch Winder
  * Yet another arduino based watch winder
  * Copyright goldcove@gmail.com
@@ -49,6 +49,18 @@ void loop() {
    * Read tpd from potentiometer
    * Read direction from three-way switch
    */
+  int analogValue = analogRead(A4);
+  int selectedTurndirection;
+  if(analogValue < 100) selectedTurndirection = 1;
+  else if(analogValue < 900) selectedTurndirection = 2;
+  else selectedTurndirection = 0;
+
+  if(previousState != selectedTurndirection) {
+
+    turndirection = selectedTurndirection;
+    Serial.print("New turn direction value ");
+    Serial.println(selectedTurndirection);
+  }
    tpd = analogRead(A5); // read the value from the potentiometer
    /*
     * Minimum TPD value 500
