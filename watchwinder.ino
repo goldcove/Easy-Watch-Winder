@@ -1,8 +1,9 @@
-/*
+  /*
  * Easy Watch Winder
  * Yet another arduino based watch winder
  * Copyright goldcove@gmail.com
  * License: GPLv3 or later
+ * Code is optimzed for Teensy 3.2 and some pins may be changed if you are using another Arduino board. Specifically analog pins 8 (A8) and 9 (A9) will need to changed to fit your board.
  */
 #define VERSION "1.0"
 
@@ -24,6 +25,8 @@ Stepper steppmotor(stepsPerRevolution, motorPin4, motorPin2, motorPin3, motorPin
  * Motor coils 1 and 4 are switched and different from the example in stepper.h background info: https://www.tigoe.com/pcomp/code/circuits/motors/stepper-motors/
  * The motor will work with 1,2,3,4 pin order but with reduced performance and possbily increased wear.
  */
+const int readTpdPin=A9; //Pin used to read tpd value from a rheostat.
+const int readTurnPin=A8; //Pin used to read turn direction.
 
 int turndirection; //Motor turnning direction. 0=both, 1=clockwise, 2=counterclockwise. In accordance with your watch requirements.
 int tpd; //Number of turns per day, in accordance with your watch requirements.
@@ -52,14 +55,37 @@ void setup() {
     Serial.print("rpm: ");
     Serial.println(rpm);
   }
+  Serial.println("");
 }
 
 void loop() {
   /*
-   * To be implemented in version 2.0:
-   * Read tpd from potentiometer
    * Read direction from three-way switch
+   * Based on code from http://www.lucadentella.it/en/2014/08/01/interruttore-a-tre-posizioni-e-arduino/
    */
+  int analogValue = analogRead(readTurnPin);
+  //int selectedTurndirection;
+  if(analogValue < 100) turndirection = 1; //CW
+  else if(analogValue < 900) turndirection = 2; //CW
+  else turndirection = 0; //Both
+  if (debug) { //print debug info
+    Serial.print("Selected turn direction: ");
+    Serial.println(String(turndirection));
+    Serial.println("NOTE: 0=both\t1=CW\t2=CCW");
+  }
+
+   tpd = analogRead(readTpdPin); // read the value from the potentiometer
+   /*
+    * Read TPD from potentiometer
+    * Minimum TPD value 500
+    * Maximum TPD value 1500
+    * based on max/min values from Orbita database (see readme)
+    */
+   tpd=map(tpd,0,1023,500,1500); //maps analog read value to tpd range
+   if (debug) { //print debug info
+     Serial.print("input TPD: ");
+     Serial.println(String(tpd));
+   }
 
   /*
    * Calculate turns for each run cycle and rest in seconds between cycle.
