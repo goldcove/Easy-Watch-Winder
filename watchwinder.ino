@@ -5,7 +5,7 @@
  * License: GPLv3 or later
  * Code is optimzed for Teensy 3.2 and some pins may be changed if you are using another Arduino board. Specifically analog pins 8 (A8) and 9 (A9) will need to changed to fit your board.
  */
-#define VERSION "1.0"
+#define VERSION "2.0"
 
 #include <Stepper.h> //Warning: Risk for motor overheat, see note at end of loop().
 const int stepsPerRevolution = 2048; //Steps required for one shat revolution. Based on your motor speed and gear ratio.
