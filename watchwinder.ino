@@ -17,7 +17,7 @@ const int motorPin1=8; //digital pin 8
 const int motorPin2=9;
 const int motorPin3=10;
 const int motorPin4=11;
-Stepper steppmotor(stepsPerRevolution, motorPin1, motorPin2, motorPin3, motorPin4); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
+Stepper steppmotor(stepsPerRevolution, motorPin4, motorPin2, motorPin3, motorPin1); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
 const int readTpdPin=A9; //Pin used to read tpd value from a rheostat.
 const int readTurnPin=A8; //Pin used to read turn direction.
 
@@ -44,6 +44,7 @@ void setup() {
     Serial.print("rpm: ");
     Serial.println(rpm);
   }
+  Serial.println("");
 }
 
 void loop() {
@@ -52,17 +53,16 @@ void loop() {
    * Based on code from http://www.lucadentella.it/en/2014/08/01/interruttore-a-tre-posizioni-e-arduino/
    */
   int analogValue = analogRead(readTurnPin);
-  int selectedTurndirection;
-  if(analogValue < 100) selectedTurndirection = 1;
-  else if(analogValue < 900) selectedTurndirection = 2;
-  else selectedTurndirection = 0;
-
-  if(previousState != selectedTurndirection) {
-
-    turndirection = selectedTurndirection;
-    Serial.print("New turn direction value ");
-    Serial.println(selectedTurndirection);
+  //int selectedTurndirection;
+  if(analogValue < 100) turndirection = 1; //CW
+  else if(analogValue < 900) turndirection = 2; //CW
+  else turndirection = 0; //Both
+  if (debug) { //print debug info
+    Serial.print("Selected turn direction: ");
+    Serial.println(String(turndirection));
+    Serial.println("NOTE: 0=both\t1=CW\t2=CCW");
   }
+
    tpd = analogRead(readTpdPin); // read the value from the potentiometer
    /*
     * Read TPD from potentiometer
