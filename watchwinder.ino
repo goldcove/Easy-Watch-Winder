@@ -5,19 +5,26 @@
  * License: GPLv3 or later
  * Code is optimzed for Teensy 3.2 and some pins may be changed if you are using another Arduino board. Specifically analog pins 8 (A8) and 9 (A9) will need to changed to fit your board.
  */
+#define VERSION "1.0"
+
 #include <Stepper.h> //Warning: Risk for motor overheat, see note at end of loop().
-const float stepsPerRevolution = 2048; //Steps required for one shat revolution. Based on your motor speed and gear ratio.
+const int stepsPerRevolution = 2048; //Steps required for one shat revolution. Based on your motor speed and gear ratio.
 int rpm = 8; //set the speed in rotation per minute (rpm)
 /*
  *  By observing videos of various commercial watch winders I have observerd that rpm usually is around 8.
  *  Test and see what rpm your motor can handle...
  *  Note: rpm less than 1 risks that your program runs continuously
  */
-const int motorPin1=8; //digital pin 8
-const int motorPin2=9;
-const int motorPin3=10;
-const int motorPin4=11;
+int motorPin1=8; //digital pin 8
+int motorPin2=9;
+int motorPin3=10;
+int motorPin4=11;
 Stepper steppmotor(stepsPerRevolution, motorPin4, motorPin2, motorPin3, motorPin1); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
+/*
+ * NOTE: Non-standard pin order for the Welleman 401 stepper motor. See https://forum.vellemanprojects.eu/t/no-reverse-arduino-uno-velleman-vma401-5vdc-stepper-motor/14362/2
+ * Motor coils 1 and 4 are switched and different from the example in stepper.h background info: https://www.tigoe.com/pcomp/code/circuits/motors/stepper-motors/
+ * The motor will work with 1,2,3,4 pin order but with reduced performance and possbily increased wear.
+ */
 const int readTpdPin=A9; //Pin used to read tpd value from a rheostat.
 const int readTurnPin=A8; //Pin used to read turn direction.
 
@@ -27,15 +34,19 @@ int turns; //number of turns to turn for each run cycle
 unsigned long rest; //seconds to rest between each run cycle
 int cw; //clockwise
 int ccw; //counterclockwise
-int debug=1; //enable debuging
+int debug=0; //enable debuging
 
 void setup() {
+  pinMode(motorPin1, OUTPUT); // Set pins to output mode
+  pinMode(motorPin2, OUTPUT);
+  pinMode(motorPin3, OUTPUT);
+  pinMode(motorPin4, OUTPUT);
   steppmotor.setSpeed(rpm);
-  // initialize the serial port:
-  Serial.begin(9600);
+  Serial.begin(9600); // initialize the serial port:
   tpd=720;
   turndirection=0;
-  Serial.println("Easy Watch Winder");
+  Serial.print("Easy Watch Winder v");
+  Serial.println(VERSION);
   if (debug) {
     Serial.print("tpd: ");
     Serial.println(tpd);
@@ -93,6 +104,7 @@ void loop() {
   /*
    * run
    */
+
   cw=0;
   ccw=0;
   switch (turndirection) {
@@ -107,15 +119,20 @@ void loop() {
       ccw=turns;
       break;
   }
+  /*
+  * With my hardware setup the clock rotaion is reversed.
+  */
   if (cw) { //running cw
-      if (debug) {Serial.print("cw turns: "); Serial.println(cw);}
       Serial.println("running cw");
+      if (debug) {Serial.print("cw turns: "); Serial.println(cw);}
       steppmotor.step(stepsPerRevolution*cw);
+      delay(500); //short pause before reversing direction. To (possibly) reduce motor strain.
   }
   if (ccw) { //running ccw
-      if (debug) {Serial.print("ccw turns: "); Serial.println(ccw);}
       Serial.println("running ccw");
+      if (debug) {Serial.print("ccw turns: "); Serial.println(ccw);}
       steppmotor.step(-stepsPerRevolution*ccw);
+      delay(500); //short pause before reversing direction. To (possibly) reduce motor strain.
   }
   /*
    * rest between run cycles
@@ -124,7 +141,7 @@ void loop() {
   /*
    *  The stepper.h library keeps some of the pins HIGH between runs.
    *  In order to reduces power consumption and heat buildup in motor,
-   *  manually set all motor pins LOW.
+   *  set all motor pins LOW.
    */
   digitalWrite(motorPin1, LOW); //turn off power to motor
   digitalWrite(motorPin2, LOW); //turn off power to motor
