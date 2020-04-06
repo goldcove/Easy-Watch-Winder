@@ -3,6 +3,7 @@
  * Yet another arduino based watch winder
  * Copyright goldcove@gmail.com
  * License: GPLv3 or later
+ * Code is optimzed for Teensy 3.2 and some pins may be changed if you are using another Arduino board. Specifically analog pins 8 (A8) and 9 (A9) will need to changed to fit your board.
  */
 #include <Stepper.h> //Warning: Risk for motor overheat, see note at end of loop().
 const float stepsPerRevolution = 2048; //Steps required for one shat revolution. Based on your motor speed and gear ratio.
@@ -17,6 +18,8 @@ const int motorPin2=9;
 const int motorPin3=10;
 const int motorPin4=11;
 Stepper steppmotor(stepsPerRevolution, motorPin1, motorPin2, motorPin3, motorPin4); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
+const int readTpdPin=A9; //Pin used to read tpd value from a rheostat.
+const int readTurnPin=A8; //Pin used to read turn direction.
 
 int turndirection; //Motor turnning direction. 0=both, 1=clockwise, 2=counterclockwise. In accordance with your watch requirements.
 int tpd; //Number of turns per day, in accordance with your watch requirements.
@@ -45,11 +48,10 @@ void setup() {
 
 void loop() {
   /*
-   * To be implemented in version 2.0:
-   * Read tpd from potentiometer
    * Read direction from three-way switch
+   * Based on code from http://www.lucadentella.it/en/2014/08/01/interruttore-a-tre-posizioni-e-arduino/
    */
-  int analogValue = analogRead(A4);
+  int analogValue = analogRead(readTurnPin);
   int selectedTurndirection;
   if(analogValue < 100) selectedTurndirection = 1;
   else if(analogValue < 900) selectedTurndirection = 2;
@@ -61,8 +63,9 @@ void loop() {
     Serial.print("New turn direction value ");
     Serial.println(selectedTurndirection);
   }
-   tpd = analogRead(A5); // read the value from the potentiometer
+   tpd = analogRead(readTpdPin); // read the value from the potentiometer
    /*
+    * Read TPD from potentiometer
     * Minimum TPD value 500
     * Maximum TPD value 1500
     * based on max/min values from Orbita database (see readme)
