@@ -19,12 +19,13 @@ int motorPin1=8; //digital pin 8
 int motorPin2=9;
 int motorPin3=10;
 int motorPin4=11;
-Stepper steppmotor(stepsPerRevolution, motorPin4, motorPin2, motorPin3, motorPin1); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
 /*
  * NOTE: Non-standard pin order for the Welleman 401 stepper motor. See https://forum.vellemanprojects.eu/t/no-reverse-arduino-uno-velleman-vma401-5vdc-stepper-motor/14362/2
  * Motor coils 1 and 4 are switched and different from the example in stepper.h background info: https://www.tigoe.com/pcomp/code/circuits/motors/stepper-motors/
  * The motor will work with 1,2,3,4 pin order but with reduced performance and possbily increased wear.
  */
+Stepper steppmotor(stepsPerRevolution, motorPin4, motorPin2, motorPin3, motorPin1); //initialize the stepper. In accordance with your motor. See https://www.arduino.cc/en/reference/stepper
+
 const int readTpdPin=A9; //Pin used to read tpd value from a rheostat.
 const int readTurnPin=A8; //Pin used to read turn direction.
 
