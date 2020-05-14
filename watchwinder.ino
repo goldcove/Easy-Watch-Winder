@@ -34,7 +34,7 @@ int turns; //number of turns to turn for each run cycle
 unsigned long rest; //seconds to rest between each run cycle
 int cw; //clockwise
 int ccw; //counterclockwise
-int debug=0; //enable debuging
+int debug=0; //set to '1' to enable debuging
 
 void setup() {
   pinMode(motorPin1, OUTPUT); // Set pins to output mode
@@ -74,13 +74,13 @@ void loop() {
     Serial.println("NOTE: 0=both\t1=CW\t2=CCW");
   }
 
-   tpd = analogRead(readTpdPin); // read the value from the potentiometer
    /*
     * Read TPD from potentiometer
     * Minimum TPD value 500
     * Maximum TPD value 1500
     * based on max/min values from Orbita database (see readme)
     */
+   tpd = analogRead(readTpdPin); // read the value from the potentiometer
    tpd=map(tpd,0,1023,500,1500); //maps analog read value to tpd range
    if (debug) { //print debug info
      Serial.print("input TPD: ");
@@ -127,22 +127,23 @@ void loop() {
       Serial.println("running cw");
       if (debug) {Serial.print("cw turns: "); Serial.println(cw);}
       steppmotor.step(-stepsPerRevolution*cw);
-      delay(500); //short pause before reversing direction. To (possibly) reduce motor strain.
+      delay(500); //short pause (0.5s) before reversing direction. To (possibly) reduce motor strain.
   }
   if (ccw) { //running ccw
       Serial.println("running ccw");
       if (debug) {Serial.print("ccw turns: "); Serial.println(ccw);}
       steppmotor.step(stepsPerRevolution*ccw);
-      delay(500); //short pause before reversing direction. To (possibly) reduce motor strain.
+      delay(500); //short pause (0.5s) before reversing direction. To (possibly) reduce motor strain.
   }
   /*
    * rest between run cycles
    */
   Serial.println("resting");
   /*
-   *  The stepper.h library keeps some of the pins HIGH between runs.
-   *  In order to reduces power consumption and heat buildup in motor,
-   *  set all motor pins LOW.
+   * The stepper.h library keeps some of the pins HIGH between runs.
+   * In order to reduces power consumption and heat buildup in motor,
+   * set all motor pins LOW.
+   * This would also allow the motor to be manually rotated.
    */
   digitalWrite(motorPin1, LOW); //turn off power to motor
   digitalWrite(motorPin2, LOW); //turn off power to motor
