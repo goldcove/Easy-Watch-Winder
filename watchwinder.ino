@@ -120,18 +120,19 @@ void loop() {
       break;
   }
   /*
-  * With my hardware setup the clock rotaion is reversed.
+  * Check the rotaion direction with your particular hardware.
+  * Direction is controlled by positive or negative values give to steppmotor.step()
   */
   if (cw) { //running cw
       Serial.println("running cw");
       if (debug) {Serial.print("cw turns: "); Serial.println(cw);}
-      steppmotor.step(stepsPerRevolution*cw);
+      steppmotor.step(-stepsPerRevolution*cw);
       delay(500); //short pause before reversing direction. To (possibly) reduce motor strain.
   }
   if (ccw) { //running ccw
       Serial.println("running ccw");
       if (debug) {Serial.print("ccw turns: "); Serial.println(ccw);}
-      steppmotor.step(-stepsPerRevolution*ccw);
+      steppmotor.step(stepsPerRevolution*ccw);
       delay(500); //short pause before reversing direction. To (possibly) reduce motor strain.
   }
   /*
